@@ -1,6 +1,13 @@
 # OCCode
 Dashboard, statistics, web services.
 
+The examples in this repository produce the following result (Extended view that the user sees).
+
+# Screenshot
+![Dashboard preview](https://i.imgur.com/aBYBtbx.png)
+
+
+
 # Methods
 
 ### [Useful] Notifications
