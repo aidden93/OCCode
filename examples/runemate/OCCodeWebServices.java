@@ -85,7 +85,7 @@ public class OCCodeWebServices implements EngineListener {
      * @param buttonText     Text display on the button under "Options" on dashboard.
      * @param selectedAction In this case (no options), the argument passed to the consumer will be an empty string.
      */
-    void addCustomAction(String name, String buttonText, Consumer<String> selectedAction) {
+    public void addCustomAction(String name, String buttonText, Consumer<String> selectedAction) {
         addCustomAction(name, buttonText, null, selectedAction);
     }
 
