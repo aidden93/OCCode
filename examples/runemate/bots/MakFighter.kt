@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit
 class Fighter : MakBot(), SkillListener {
 
     private val webServices = OCCodeWebServices("j0mGciUnQ7DjO6VIXaSXF0vBs3ZyiV", this)
+    private var currentFood = "Lobster"
 
     override fun onStart(vararg arguments: String?) {
         super.onStart(*arguments)
