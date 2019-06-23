@@ -168,7 +168,6 @@ public class OCCodeWebServices implements EngineListener {
         details.put("script_name", bot.getMetaData().getName());
         details.put("custom_setup", customActions);
         details.put("custom", customMetricsMap);
-        getSessionId();
     }
 
 
