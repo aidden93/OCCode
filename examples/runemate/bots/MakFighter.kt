@@ -1,22 +1,6 @@
 package com.mihael.bots.fighter
 
-import com.OCCodeWebServices
-import com.mak.framework.general.MakBot
-import com.mak.ui.extenders.UIExtender
-import com.mihael.bots.fighter.data.FighterSettings
-import com.mihael.bots.fighter.ui.Controller
-import com.mihael.bots.fighter.validators.ChatValidator
-import com.mihael.bots.slayer.data.CustomPlayerSense
-import com.mihael.interaction.Robot
-import com.runemate.game.api.hybrid.Environment
-import com.runemate.game.api.hybrid.local.hud.interfaces.Health
-import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory
-import com.runemate.game.api.hybrid.region.Players
-import com.runemate.game.api.script.framework.core.LoopingThread
-import com.runemate.game.api.script.framework.listeners.SkillListener
-import com.runemate.game.api.script.framework.listeners.events.SkillEvent
-import java.util.concurrent.ScheduledThreadPoolExecutor
-import java.util.concurrent.TimeUnit
+import  ...
 
 class Fighter : MakBot(), SkillListener {
 
@@ -25,8 +9,6 @@ class Fighter : MakBot(), SkillListener {
 
     override fun onStart(vararg arguments: String?) {
         super.onStart(*arguments)
-        createRootTask(ChatValidator(fighterSettings))
-
         webServices.apply {
             setup {
                 setIsSafeToStop { !Robot.isInCombat() }
