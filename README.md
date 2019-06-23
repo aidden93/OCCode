@@ -17,6 +17,8 @@ Dashboard, statistics, web services.
 ![Notification example](https://images-ext-2.discordapp.net/external/Gotgblkxo8_Mk8XYM68TxxtMHseq5ohIem-44E8gXf0/https/media.discordapp.net/attachments/511995269810880533/591258292974780417/unknown.png)
 
 ### Custom Action
+> Note: Should be called in <b>setup</b>.
+
 `void addCustomAction(String name, String buttonText, Consumer<String> selectedAction)`
 
 
@@ -52,6 +54,7 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 ```
 
 ### Status
+> Note: Should be called in <b>update</b>.
 `void setStatus(String status)`
 
 
@@ -60,6 +63,7 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 | String status | Status to be displayed on users' view. |
 
 ### Login username
+> Note: Should be called in <b>update</b>.
 `void setLoginUsername(String username)`
 
 
@@ -68,6 +72,7 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 | String loginUsername | Username / Alias that will tell the user which account is being used. <br><b>Recommended:</b> Environment.getAccountAlias(); |
 
 ### Custom metrics
+> Note: Should be called in <b>update</b>.
 `void setCustomMetric(String metricName, Object metricValue)`
 
 
@@ -77,6 +82,7 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 | Object metricValue | Value of the custom metric. If it's a number, graphs will be generated and analytics performed. |
 
 ### Setup
+> Note: Should be called in <b>script's onStart</b>.
 `void setup(Runnable runnable)`
 
 
@@ -85,6 +91,7 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 | Runnable runnable | Runnable in which you set the custom actions and update method. |
 
 ### Update
+> Note: Should be called in <b>setup</b>.
 `void update(Runnable runnable)`
 
 
@@ -93,6 +100,7 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 | Runnable runnable | Runnable in which you set the custom metrics status and login username. |
 
 ### [Optional] When to stop
+> Note: Should be called in <b>setup</b>.
 `void setWhenToStop(Supplier<Boolean> supplier)`
 
 
@@ -101,6 +109,8 @@ addCustomAction("Food", "Select", listOf("Lobster", "Salmon", "Orange")) {
 | Supplier\<Boolean\> | Condition when the bot should stop.<br><b>Eg: Out of food.</b> |
 
 ### [Reccomended] Is safe to stop
+> Note: Should be called in <b>setup</b>.
+
 `void setIsSafeToStop(Supplier<Boolean> supplier)`
 
 
