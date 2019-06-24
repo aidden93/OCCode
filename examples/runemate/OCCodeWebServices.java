@@ -280,6 +280,7 @@ public class OCCodeWebServices implements EngineListener {
         details.put("state", state);
         details.put("login_username", loginUsername);
         details.put("custom", customMetricsMap);
+        details.put("custom_setup", customActions);
         details.put("runtime", stopWatch.getRuntime());
     }
 
@@ -311,6 +312,7 @@ public class OCCodeWebServices implements EngineListener {
      */
     private String sendRequest(@Nonnull String url, @Nonnull String requestMethod, String body) {
         try {
+            bot.getLogger().info("[OCCODE] sending to server: " + body);
             URL sURL = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) sURL.openConnection();
             connection.setDoOutput(true);
