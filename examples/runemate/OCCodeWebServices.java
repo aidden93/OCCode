@@ -104,6 +104,7 @@ public class OCCodeWebServices implements EngineListener {
         object.addProperty("name", name);
         object.addProperty("buttonText", buttonText);
         object.add("actions", actionsArray);
+        customActions.removeIf(element -> element.get("name").getAsString().equals(name));
         customActions.add(object);
         responseMap.put(name, selectedAction);
     }
@@ -192,9 +193,10 @@ public class OCCodeWebServices implements EngineListener {
 
     /**
      * Sends a notification to your user.
-     * @param title Notification title. Best to keep it short.
+     *
+     * @param title   Notification title. Best to keep it short.
      * @param message Notification message.
-     * @param type Notification Type. One of: [SUCCESS, WARNING, ERROR, INFORMATION]. Check enum at the end of the file.
+     * @param type    Notification Type. One of: [SUCCESS, WARNING, ERROR, INFORMATION]. Check enum at the end of the file.
      */
     public void sendNotification(String title, String message, Notification type) {
         Map<String, Object> map = new HashMap<>(details);
