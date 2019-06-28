@@ -203,7 +203,11 @@ public class OCCodeWebServices implements EngineListener {
         map.put("type", type.opcode);
         map.put("title", title);
         map.put("message", message);
-        sendRequest(server + "/notify", "POST", gson.toJson(map));
+        if (isSetup) {
+            sendRequest(server + "/notify", "POST", gson.toJson(map));
+        } else {
+            bot.getLogger().warn("[OCCODE] Setup must be called before sending a notification!");   
+        }
     }
 
 
@@ -214,8 +218,8 @@ public class OCCodeWebServices implements EngineListener {
      */
     public void update(Runnable runnable) {
         if (!isSetup) {
-            System.out.println("Update must not be called before setup!");
-            bot.stop("Update must not be called before setup!");
+            bot.getLogger().warn("[OCCODE] Update must not be called before setup!");
+            bot.stop("[OCCODE] Update must not be called before setup!");
             return;
         }
         new Thread(() -> {
@@ -264,7 +268,7 @@ public class OCCodeWebServices implements EngineListener {
                             if (hasToTakeScreenshot && !takeScreenshot) takeScreenshot = true;
                         }
                     } catch (Exception e) {
-                        bot.getLogger().debug("Error with OCCode");
+                        bot.getLogger().severe("[OCCODE] Error with OCCode");
                         e.printStackTrace();
                     }
                 }
@@ -314,7 +318,7 @@ public class OCCodeWebServices implements EngineListener {
      */
     private String sendRequest(@Nonnull String url, @Nonnull String requestMethod, String body) {
         try {
-            bot.getLogger().info("[OCCODE] sending to server: " + body);
+            bot.getLogger().debug("[OCCODE] Sending to server: " + body);
             URL sURL = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) sURL.openConnection();
             connection.setDoOutput(true);
@@ -324,6 +328,7 @@ public class OCCodeWebServices implements EngineListener {
             int code = connection.getResponseCode();
             return new BufferedReader(new InputStreamReader(code == 200 ? connection.getInputStream() : connection.getErrorStream())).readLine();
         } catch (Exception e) {
+            bot.getLogger().severe("[OCCODE] Error sending request");
             e.printStackTrace();
         }
         return null;
@@ -397,7 +402,7 @@ public class OCCodeWebServices implements EngineListener {
                 sendRequest(server + "/screenshot", "POST", gson.toJson(map));
             }
         } catch (Exception e) {
-            bot.getLogger().warn("[OWS] The request to send a screenshot failed");
+            bot.getLogger().warn("[OCCODE] The request to send a screenshot failed");
             e.printStackTrace();
         }
     }
