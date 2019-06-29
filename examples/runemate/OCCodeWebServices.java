@@ -203,11 +203,7 @@ public class OCCodeWebServices implements EngineListener {
         map.put("type", type.opcode);
         map.put("title", title);
         map.put("message", message);
-        if (isSetup) {
-            sendRequest(server + "/notify", "POST", gson.toJson(map));
-        } else {
-            bot.getLogger().warn("[OCCODE] Setup must be called before sending a notification!");   
-        }
+        sendRequest(server + "/notify", "POST", gson.toJson(map));
     }
 
 
@@ -317,20 +313,25 @@ public class OCCodeWebServices implements EngineListener {
      * @return Returns the result of the request as a String.
      */
     private String sendRequest(@Nonnull String url, @Nonnull String requestMethod, String body) {
-        try {
-            bot.getLogger().debug("[OCCODE] Sending to server: " + body);
-            URL sURL = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) sURL.openConnection();
-            connection.setDoOutput(true);
-            connection.setRequestMethod(requestMethod);
-            connection.getOutputStream().write((body + "\r\n").getBytes(Charset.forName("UTF-8")));
+        if (isSetup) {
+            try {
+                bot.getLogger().debug("[OCCODE] Sending to server: " + body);
+                URL sURL = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) sURL.openConnection();
+                connection.setDoOutput(true);
+                connection.setRequestMethod(requestMethod);
+                connection.getOutputStream().write((body + "\r\n").getBytes(Charset.forName("UTF-8")));
 
-            int code = connection.getResponseCode();
-            return new BufferedReader(new InputStreamReader(code == 200 ? connection.getInputStream() : connection.getErrorStream())).readLine();
-        } catch (Exception e) {
-            bot.getLogger().severe("[OCCODE] Error sending request");
-            e.printStackTrace();
+                int code = connection.getResponseCode();
+                return new BufferedReader(new InputStreamReader(code == 200 ? connection.getInputStream() : connection.getErrorStream())).readLine();
+            } catch (Exception e) {
+                bot.getLogger().severe("[OCCODE] Error sending request");
+                e.printStackTrace();
+            }
+        } else {
+            bot.getLogger().warn("[OCCODE] Setup must be called before a request can be sent");   
         }
+        
         return null;
     }
 
